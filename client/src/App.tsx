@@ -2,7 +2,6 @@ import React, { Fragment, Suspense } from "react";
 //import Table from "./components/TableComponent";
 import { MuiThemeProvider, CssBaseline } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { withStyles } from "@material-ui/core";
 import PrivateRoute from "./components/PrivateRoute";
 
 import theme from "./theme";
