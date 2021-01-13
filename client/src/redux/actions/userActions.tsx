@@ -1,38 +1,35 @@
+import axios from "axios";
 import { userConstants } from "../actions/actionNames";
-import { userService } from "../services/userServices";
 
-export const userActions = {
-  login,
-  logout,
-};
-
-function login(username, password) {
+export const login = (credentials) => {
   return (dispatch) => {
-    dispatch(request({ username }));
+    dispatch({ type: userConstants.LOGIN_REQUEST });
+    axios
+      .post(
+        "https://weather-against-humanity.herokuapp.com/api/auth/login",
+        credentials
+      )
+      .then((res) => {
+        dispatch({
+          type: userConstants.LOGIN_SUCCESS,
+          payload: res.data.token,
+        });
+        localStorage.setItem("token", res.data.token);
+      })
+      .catch(function (error) {
+        dispatch({
+          type: userConstants.LOGIN_FAILURE,
+          payload: error.message,
+        });
+      });
 
-    userService.login(username, password).then(
-      (user) => {
-        dispatch(success(user));
-        //history.push("/");
-      },
-      (error) => {
-        dispatch(failure(error));
-        //dispatch(alertActions.error(error));
-      }
-    );
+    console.log(credentials);
   };
-
-  function request(user) {
-    return { type: userConstants.LOGIN_REQUEST, user };
-  }
-  function success(user) {
-    return { type: userConstants.LOGIN_SUCCESS, user };
-  }
-  function failure(error) {
-    return { type: userConstants.LOGIN_FAILURE, error };
-  }
-}
-function logout() {
-  userService.logout();
-  return { type: userConstants.LOGOUT };
-}
+};
+export const logout = () => {
+  return (dispatch) => {
+    dispatch({ type: userConstants.LOGOUT });
+    localStorage.removeItem("token");
+    // Logout, delete token
+  };
+};
