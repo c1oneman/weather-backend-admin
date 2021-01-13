@@ -10,11 +10,11 @@ export const login = (credentials) => {
         credentials
       )
       .then((res) => {
+        localStorage.setItem("token", res.data.token);
         dispatch({
           type: userConstants.LOGIN_SUCCESS,
           payload: res.data.token,
         });
-        localStorage.setItem("token", res.data.token);
       })
       .catch(function (error) {
         dispatch({
