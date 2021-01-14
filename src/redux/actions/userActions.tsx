@@ -1,5 +1,6 @@
 import axios from "axios";
 import { userConstants } from "../actions/actionNames";
+import history from "../../history";
 
 export const login = (credentials) => {
   return (dispatch) => {
@@ -29,7 +30,9 @@ export const login = (credentials) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch({ type: userConstants.LOGOUT });
+
     localStorage.removeItem("token");
+    history.push("/login");
     // Logout, delete token
   };
 };

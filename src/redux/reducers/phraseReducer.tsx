@@ -1,12 +1,4 @@
-import {
-  ADD_PHRASE,
-  ADD_PHRASES_SUCCESS,
-  DELETE_PHRASE,
-  DELETE_PHRASES_SUCCESS,
-  DELETE_PHRASES_FAILURE,
-  GET_PHRASE,
-  GET_PHRASES_SUCCESS,
-} from "../actions/actionNames";
+import { phraseConstants } from "../actions/actionNames";
 const INITIALSTATE = {
   phrases: [],
 };
@@ -15,23 +7,28 @@ interface Phrase {
 }
 export const phraseReducer = (state = INITIALSTATE, actions) => {
   switch (actions.type) {
-    case GET_PHRASE:
+    case phraseConstants.GET_PHRASE:
       return state;
-    case GET_PHRASES_SUCCESS:
+    case phraseConstants.GET_PHRASES_SUCCESS:
       return {
         ...state,
         phrases: actions.payload,
       };
-    case ADD_PHRASE:
+    case phraseConstants.ADD_PHRASE:
       return state;
-    case ADD_PHRASES_SUCCESS:
+    case phraseConstants.ADD_PHRASES_SUCCESS:
       return {
         ...state,
         phrases: [...state.phrases, actions.payload],
       };
-    case DELETE_PHRASE:
+    case phraseConstants.ADD_PHRASE_FAILURE:
+      return {
+        ...state,
+        error: actions.payload,
+      };
+    case phraseConstants.DELETE_PHRASE:
       return state;
-    case DELETE_PHRASES_SUCCESS:
+    case phraseConstants.DELETE_PHRASES_SUCCESS:
       return {
         ...state,
         phrases: [
@@ -40,7 +37,7 @@ export const phraseReducer = (state = INITIALSTATE, actions) => {
           }),
         ],
       };
-    case DELETE_PHRASES_FAILURE:
+    case phraseConstants.DELETE_PHRASES_FAILURE:
       return {
         ...state,
         error: actions.payload,

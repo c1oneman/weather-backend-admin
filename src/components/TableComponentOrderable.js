@@ -23,6 +23,7 @@ import stableSort from "../shared/functions/stableSort";
 import getSorting from "../shared/functions/getSorting";
 import HighlightedInformation from "../shared/components/HighlightedInformation";
 import { getPhrases, deletePhrase } from "../redux/actions/phrasesActions";
+import { logout } from "../redux/actions/userActions";
 const styles = (theme) => ({
   wrapper: {
     margin: theme.spacing(1),
@@ -98,6 +99,12 @@ const styles = (theme) => ({
   },
   toolbar: {
     justifyContent: "space-between",
+  },
+  errorbar: {
+    justifyContent: "space-between",
+    backgroundColor: "#ffe554",
+    color: "black",
+    borderWidth: "1px"
   }
 });
 // pre defined organization
@@ -155,6 +162,8 @@ const TableComponentOrderable = (props) => {
   const openAddPostModal = useCallback(() => {
     setIsAddPostPaperOpen(true);
   }, [setIsAddPostPaperOpen]);
+
+
 
   const closeAddPostModal = useCallback(() => {
     setIsAddPostPaperOpen(false);
@@ -286,9 +295,21 @@ const TableComponentOrderable = (props) => {
         </Paper>
       </Box >
       {error ? (
-        <HighlightedInformation >
-          Error: {error}
-        </HighlightedInformation>
+        <Paper>
+          <Toolbar className={classes.errorbar}>
+            Error: {error}
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              onClick={() => dispatch(logout())}
+            >
+              Sign In?
+        </Button>
+
+          </Toolbar>
+        </Paper>
+
       ) : <></>}
     </div>
   );
