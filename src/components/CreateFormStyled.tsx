@@ -131,10 +131,8 @@ function CreateFormStyled(props) {
       heat_index: inputOptionsHeat_Index.indexOf(phrase.heat_index) + 1,
       isExplicit: phrase.isExplicit,
     };
-    console.log(newPhrase);
     dispatch(addPhrases(newPhrase));
     onClose();
-    setPhrases(initPhrase);
   };
   const handleChange = useCallback(
     (event) => {
