@@ -125,7 +125,7 @@ const rowsPerPage = 10;
 
 const TableComponentOrderable = (props) => {
   const { classes } = props;
-  const { phrases } = useSelector((state) => state.phrasesState);
+  const { phrases, error } = useSelector((state) => state.phrasesState);
   const [isAddPostPaperOpen, setIsAddPostPaperOpen] = useState(false);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState(null);
@@ -189,7 +189,7 @@ const TableComponentOrderable = (props) => {
         </Button>
         </Toolbar>
       </Paper>
-      <Box mt={2}>
+      <Box mt={2} mb={2}>
         <Paper>
           <Toolbar className={classes.toolbar}>
             <Typography variant="h6">Phrases</Typography>
@@ -258,7 +258,7 @@ const TableComponentOrderable = (props) => {
                   <Box m={2}>
                     <HighlightedInformation>
                       No phrases found/loading phrases.
-                </HighlightedInformation>
+                    </HighlightedInformation>
                   </Box>
                 )}
             </div>
@@ -280,8 +280,16 @@ const TableComponentOrderable = (props) => {
               />
             </div>
           </Box>
+
+
+
         </Paper>
       </Box >
+      {error ? (
+        <HighlightedInformation >
+          Error: {error}
+        </HighlightedInformation>
+      ) : <></>}
     </div>
   );
 };

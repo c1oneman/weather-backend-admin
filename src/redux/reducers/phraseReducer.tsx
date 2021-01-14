@@ -3,6 +3,7 @@ import {
   ADD_PHRASES_SUCCESS,
   DELETE_PHRASE,
   DELETE_PHRASES_SUCCESS,
+  DELETE_PHRASES_FAILURE,
   GET_PHRASE,
   GET_PHRASES_SUCCESS,
 } from "../actions/actionNames";
@@ -38,6 +39,11 @@ export const phraseReducer = (state = INITIALSTATE, actions) => {
             return phrase.id !== actions.payload;
           }),
         ],
+      };
+    case DELETE_PHRASES_FAILURE:
+      return {
+        ...state,
+        error: actions.payload,
       };
     default:
       return state;

@@ -5,6 +5,7 @@ import {
   ADD_PHRASES_SUCCESS,
   DELETE_PHRASE,
   DELETE_PHRASES_SUCCESS,
+  DELETE_PHRASES_FAILURE,
   GET_PHRASE,
   GET_PHRASES_SEARCH_SUCCESS,
   GET_PHRASES_SUCCESS,
@@ -45,6 +46,9 @@ export const deletePhrase = (id) => {
       .delete(
         `https://weather-against-humanity.herokuapp.com/api/phrases/${id}`
       )
+      .catch((error) => {
+        dispatch({ type: DELETE_PHRASES_FAILURE, payload: error.message });
+      })
       .then(() => {
         dispatch({ type: DELETE_PHRASES_SUCCESS, payload: id });
       });

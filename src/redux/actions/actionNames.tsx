@@ -6,7 +6,7 @@ export const ADD_PHRASE = "ADD_PHRASE";
 export const ADD_PHRASES_SUCCESS = "ADD_PHRASES_SUCCESS";
 export const DELETE_PHRASE = "ADD_PHRASE";
 export const DELETE_PHRASES_SUCCESS = "ADD_PHRASES_SUCCESS";
-
+export const DELETE_PHRASES_FAILURE = "DELETE_PHRASES_FAILURE";
 // Auth
 export const userConstants = {
   LOGIN_REQUEST: "LOGIN_REQUEST",
